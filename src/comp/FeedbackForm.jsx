@@ -8,6 +8,7 @@ export const Feedback = () => {
   const [status, setStatus] = useState('');
   const [showFeedbacks, setShowFeedbacks] = useState(false);
   const [feedbacks, setFeedbacks] = useState([]);
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +34,16 @@ export const Feedback = () => {
 
   return (
     <div className="min-h-screen bg-black text-white p-6 relative">
+      {/* Admin Panel Button */}
+      {isAdmin && (
+        <button
+          onClick={() => window.location.href = '/admin'}
+          className="absolute top-4 left-4 bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md"
+        >
+          Admin Panel
+        </button>
+      )}
+
       <button
         onClick={fetchFeedbacks}
         className="absolute top-4 right-4 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg shadow-md"

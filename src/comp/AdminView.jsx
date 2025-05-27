@@ -8,9 +8,15 @@ export const AdminView = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/getfeedback');
+        const token = localStorage.getItem('token');
+        const res = await axios.get('http://localhost:5000/api/getfeedback', {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
         setFeedbacks(res.data);
       } catch (err) {
+        if (err.response && err.response.status === 401) {
+          window.location.href = '/login';
+        }
         console.error(err);
       }
     };
