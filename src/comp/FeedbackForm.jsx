@@ -1,6 +1,7 @@
 // src/comp/Feedback.jsx
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const Feedback = () => {
   const [name, setName] = useState('');
@@ -9,6 +10,7 @@ export const Feedback = () => {
   const [showFeedbacks, setShowFeedbacks] = useState(false);
   const [feedbacks, setFeedbacks] = useState([]);
   const isAdmin = localStorage.getItem('isAdmin') === 'true';
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +39,7 @@ export const Feedback = () => {
       {/* Admin Panel Button */}
       {isAdmin && (
         <button
-          onClick={() => window.location.href = '/admin'}
+          onClick={() => navigate('/admin')}
           className="absolute top-4 left-4 bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md"
         >
           Admin Panel

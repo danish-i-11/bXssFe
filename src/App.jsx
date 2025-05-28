@@ -42,8 +42,9 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/feedback" element={<ProtectedRoute adminOnly={false}><Feedback /></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute adminOnly={true}><AdminView /></ProtectedRoute>} />
-        <Route path="/" element={<ProtectedRoute adminOnly={false}><Feedback /></ProtectedRoute>} />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>

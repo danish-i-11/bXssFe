@@ -15,9 +15,10 @@ export function Login({ setIsLoggedIn }) {
       const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
       // Set JWT in a cookie for XSS demo (insecure, for testing only)
       document.cookie = `token=${res.data.token}; path=/`;
+      localStorage.setItem('token', res.data.token);
       localStorage.setItem('isAdmin', res.data.isAdmin);
       setIsLoggedIn(true);
-      navigate('/'); // Always go to feedback page after login
+      navigate('/feedback'); // Always go to feedback page after login
     } catch (err) {
       setError('Invalid credentials');
     }
